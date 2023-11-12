@@ -1,0 +1,16 @@
+<h2>Tenants</h2>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Email</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr *ngFor="let tenant of tenants">
+      <td>{{ tenant.name }}</td>
+      <td>{{ tenant.email }}</td>
+    </tr>
+  </tbody>
+</table>

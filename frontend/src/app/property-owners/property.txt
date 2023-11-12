@@ -1,0 +1,147 @@
+import { Component, OnInit } from '@angular/core';
+import { PropertyOwnerService } from '../property-owner.service';
+
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+
+
+export interface PropertyOwner {
+  id: string;
+  name: string;
+  email: string;
+  password: string;
+}
+
+
+export interface Property {
+  _id: string;
+  owner: PropertyOwner;
+  rent: number;
+  area: string;
+  place: string;
+  amenities: string[];
+  status: 'Available' | 'Occupied';
+}
+
+
+@Component({
+  selector: 'app-property-owners',
+  templateUrl: './property-owners.component.html',
+  styleUrls: ['./property-owners.component.css']
+})
+export class PropertyOwnersComponent implements OnInit {
+  propertyOwners: any;
+  properties: Property[]=[];
+
+  constructor(private http: HttpClient, private propertyOwnerService: PropertyOwnerService) {}
+
+  ngOnInit() {
+
+    this.getPropertyOwners();
+
+  }
+
+  getPropertyOwners() {
+    this.propertyOwnerService.getPropertyOwners().subscribe(
+      (data: PropertyOwner[]) => {
+        this.propertyOwners = data;
+        this.getProperties();
+
+      },
+      error => {
+        console.log('An error occurred while fetching property owners:', error);
+      }
+
+
+    );
+  }
+
+  getProperties(): void {
+    const token = localStorage.getItem('token'); // Retrieve token from local storage
+
+    if (token && this.propertyOwners) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+
+      this.propertyOwners.forEach((owner: any) => {
+        this.http
+          .get(`http://localhost:3000/property-owners/${owner._id}/properties`, { headers })
+          .subscribe(
+            (response: any) => {
+              this.properties = this.properties.concat(response);
+              console.log(this.properties)
+            },
+            (error: any) => {
+              console.error('Error fetching properties:', error);
+            }
+          );
+      });
+    }
+  }
+
+    updateProperty(property: any): void {
+    const token = localStorage.getItem('token'); // Retrieve token from local storage
+
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      this.propertyOwners.forEach((owner: any) => {
+      this.http.put(`http://localhost:3000/property-owners/${owner._id}/properties/${property._id}`, property, { headers })
+        .subscribe(
+          (response: any) => {
+            console.log('Property updated successfully:', response);
+            // Refresh properties after successful update
+            this.getProperties();
+          },
+          (error: any) => {
+            console.error('Error updating property:', error);
+          }
+        );
+      });
+    }
+
+  }
+
+  deleteProperty(property: any): void {
+    const token = localStorage.getItem('token'); // Retrieve token from local storage
+
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      this.propertyOwners.forEach((owner: any) => {
+      this.http.delete(`http://localhost:3000/property-owners/${owner._id}/properties/${property._id}`, { headers })
+        .subscribe(
+          (response: any) => {
+            console.log('Property deleted successfully:', response);
+            // Refresh properties after successful deletion
+            this.getProperties();
+          },
+          (error: any) => {
+            console.error('Error deleting property:', error);
+          }
+        );
+      });
+    }
+  }
+
+  changeStatus(property: Property): void {
+    // Toggle the status between 'Available' and 'Occupied'
+    property.status = property.status === 'Available' ? 'Occupied' : 'Available';
+
+    const token = localStorage.getItem('token'); // Retrieve token from local storage
+
+    if (token) {
+      const headers = new HttpHeaders().set('Authorization', `Bearer ${token}`);
+      this.propertyOwners.forEach((owner: any) => {
+        this.http
+          .put(`http://localhost:3000/property-owners/${owner._id}/properties/${property._id}`, property, { headers })
+          .subscribe(
+            (response: any) => {
+              console.log('Property status changed successfully:', response);
+              // Refresh properties after successful status change
+              this.getProperties();
+            },
+            (error: any) => {
+              console.error('Error changing property status:', error);
+            }
+          );
+      });
+    }
+  }
+}

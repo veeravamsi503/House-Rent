@@ -1,0 +1,32 @@
+<div class="container">
+  <h2>Add Property</h2>
+  <form [formGroup]="propertyForm" (ngSubmit)="onSubmit()">
+    <div class="mb-3">
+      <label for="owner" class="form-label">Owner</label>
+      <input type="text" id="owner" class="form-control" formControlName="owner" required>
+    </div>
+    <div class="mb-3">
+      <label for="rent" class="form-label">Rent</label>
+      <input type="number" id="rent" class="form-control" formControlName="rent" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="rent" class="form-label">Contact Number</label>
+      <input type="number" id="contact" class="form-control" formControlName="contact" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="area" class="form-label">Area</label>
+      <input type="text" id="area" class="form-control" formControlName="area" required>
+    </div>
+    <div class="mb-3">
+      <label for="place" class="form-label">Place</label>
+      <input type="text" id="place" class="form-control" formControlName="place" required>
+    </div>
+    <div class="mb-3">
+      <label for="amenities" class="form-label">Amenities (comma-separated)</label>
+      <input type="text" id="amenities" class="form-control" formControlName="amenities" required>
+    </div>
+    <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>

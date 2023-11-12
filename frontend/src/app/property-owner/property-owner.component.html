@@ -1,0 +1,40 @@
+<div *ngIf="propertyOwner">
+  <h2>Property Owner Details</h2>
+  <p>Name: {{ propertyOwner }}</p>
+  <p>Email: {{ propertyOwner }}</p>
+</div>
+
+<div *ngIf="properties && properties.length > 0">
+  <h2>Properties</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>Rent</th>
+        <th>Area</th>
+        <th>Place</th>
+        <th>Amenities</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of properties">
+        <td>{{ property.rent }}</td>
+        <td>{{ property.area }}</td>
+        <td>{{ property.place }}</td>
+        <td>
+          <ul>
+            <li *ngFor="let amenity of property.amenities">{{ amenity }}</li>
+          </ul>
+        </td>
+        <td>
+          <!-- <button (click)="updateProperty(property)">Update</button>
+          <button (click)="deleteProperty(property)">Delete</button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="properties && properties.length === 0">
+  <p>No properties found.</p>
+</div>

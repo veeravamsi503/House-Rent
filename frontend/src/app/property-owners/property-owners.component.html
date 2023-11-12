@@ -1,0 +1,57 @@
+<!-- <mat-card>
+  <mat-card-header>
+    <mat-card-title>Property Owners</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <div *ngIf="propertyOwners">
+      <ul class="list-group">
+        <li class="list-group-item" *ngFor="let owner of propertyOwners">
+          <div class="font-weight-bold">Name: {{ owner.name }}</div>
+          <div>Email: {{ owner.email }}</div>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="!propertyOwners" class="text-muted">Loading property owners...</div>
+  </mat-card-content>
+</mat-card> -->
+
+<div *ngIf="properties && properties.length > 0" class="container mt-4">
+  <h2 >Properties</h2>
+  <table class="table table-striped text-light">
+    <thead>
+      <tr>
+        <th>PID</th>
+        <th>Rent</th>
+        <th>Area</th>
+        <th>Place</th>
+        <th>Amenities</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let property of properties" class="text-light">
+        <td>{{property._id}}</td>
+        <td>{{ property.rent }}</td>
+        <td>{{ property.area }}</td>
+        <td>{{ property.place }}</td>
+        <td>
+          <ul class="list-unstyled">
+            <li *ngFor="let amenity of property.amenities">{{ amenity }}</li>
+          </ul>
+        </td>
+        <td>{{ property.status }}</td>
+        <td>
+          <!-- <button (click)="updateProperty(property)" class="btn btn-primary mx-2">Update</button> -->
+          <button (click)="deleteProperty(property)" class="btn btn-danger mx-2">Delete</button>
+          <button (click)="changeStatus(property)" class="btn btn-info mx-2">Change Status</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div *ngIf="properties && properties.length === 0" class="mt-4">
+  <p>No properties found.</p>
+</div>

@@ -1,0 +1,61 @@
+
+
+<nav class="navbar navbar-light bg-light">
+ <div class="container-fluid">
+    <a class="navbar-brand" href="#">
+      <!-- <img src="/docs/5.0/assets/brand/bootstrap-logo.svg" alt="" width="30" height="24" class="d-inline-block align-text-top"> -->
+      Home Search
+    </a>
+  </div>
+</nav>
+<mat-sidenav-container class="container-fluid h-100"  >
+  <mat-sidenav #sidenav mode="side" opened class="sidenav" >
+    <mat-nav-list>
+      <!-- <a mat-list-item *ngIf="isLoggedIn && usertype=='owner'" routerLink="/dashboard" routerLinkActive="active">Dashboard</a> -->
+      <a mat-list-item *ngIf="isLoggedIn && usertype=='owner'"  routerLink="/property-owners" routerLinkActive="active">My Property</a>
+      <a mat-list-item *ngIf="isLoggedIn && usertype=='tenant' || usertype=='owner' " routerLink="/properties" routerLinkActive="active">Properties</a>
+      <!-- <a mat-list-item *ngIf="isLoggedIn && usertype=='tenant'" routerLink="/tenants" routerLinkActive="active">Tenants</a> -->
+      <a mat-list-item *ngIf="isLoggedIn && usertype=='owner'" routerLink="/add-property" routerLinkActive="active">Add Property</a>
+
+      <!-- <a mat-list-item *ngIf="isLoggedIn && usertype=='owner'" routerLink="/property-owner" routerLinkActive="active">My Property</a> -->
+
+    </mat-nav-list>
+  </mat-sidenav>
+
+  <mat-sidenav-content >
+    <mat-toolbar color="primary" >
+
+      <div class="col-md-12">
+        <div class="row">
+          <div class="col-md-10">
+            <button mat-icon-button (click)="sidenav.toggle()">
+              <mat-icon>menu</mat-icon>
+              <!-- <mat-icon>medical_services</mat-icon> -->
+            </button>
+            <span class="spacer"></span>
+            <!-- <span>BookMyDoctor</span> -->
+            <span class="logo">
+              <!-- <mat-icon>medical_services</mat-icon> -->
+              HouseSearch
+            </span>
+          </div>
+          <div class="col-md-2">
+
+  <button *ngIf="!isLoggedIn" mat-button routerLink="/login" >Login</button>
+  <button *ngIf="!isLoggedIn" mat-raised-button color="accent" routerLink="/register">Sign Up</button>
+            <button *ngIf="isLoggedIn" mat-raised-button class="mr-3 " (click)="logout()">
+              <i class="bi bi-box-arrow-right"></i> Logout
+            </button>
+          </div>
+        </div>
+      </div>
+    
+
+    </mat-toolbar>
+    <div class="content h-100">
+      <router-outlet></router-outlet>
+    </div>
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+

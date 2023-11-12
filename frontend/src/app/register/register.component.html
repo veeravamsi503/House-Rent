@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.0.2/css/bootstrap.min.css" />
+    <!-- Fontawesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css">
+
+</head>
+
+<body>
+
+    <div class="col-md-12">
+        <div class="row d-flex justify-content-center align-items-center p-5">
+            <div class="col-md-4 border bg-light text-dark">
+                <div class="mybox container  my-5">
+                    <!-- Pills navs -->
+
+                    <!-- Pills content -->
+                    <div class="tab-content">
+
+
+                        <div *ngIf="!isLoggedIn" class="tab-pane fade show active" role="tabpanel">
+                            <div class="text-center">
+
+                           <strong><!--<mat-icon>medical_services</mat-icon>--><h1>Home Rental System</h1><br> Registration Form</strong>
+                            </div>
+                            <hr>
+                            <form (submit)="onRegister()">
+                                <!-- Username input -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="registerUsername"><i class="bi bi-person-circle"></i> Username</label>
+                                    <input type="text" id="registerUsername" class="form-control" [(ngModel)]="username" name="username" required />
+                                </div>
+                                     <!-- Username input -->
+                                     <div class="form-outline mb-4">
+                                      <label class="form-label" for="registerEmail"><i class="bi bi-person-circle"></i> Email</label>
+                                      <input type="email" id="registerEmail" class="form-control" [(ngModel)]="email" name="email" />
+                                  </div>
+
+                                <!-- Password input -->
+                                <div class="form-outline mb-4">
+                                    <label class="form-label" for="registerPassword"><i class="bi bi-lock"></i> Password</label>
+                                    <input type="password" id="registerPassword" class="form-control" [(ngModel)]="password" name="password" />
+                                </div>
+
+                                <!-- Register As input -->
+                                <div class="form-group mb-4">
+                                    <label class="form-label" for="registerRepeatPassword"><i class="bi bi-person-plus"></i> Register As</label>
+                                    <div class="input-group">
+                                        <select class="form-select" id="usertype" name="usertype" [(ngModel)]="usertype">
+                                          <option value="owner" >OWNER</option>
+                                          <option value="tenant">TENANT</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <!-- Submit button -->
+                                <button type="submit" class="btn btn-primary btn-block mb-3"><i class="bi bi-box-arrow-in-right"></i> Sign Up</button>
+
+                                <!-- Login button -->
+                                <div class="text-center">
+                                    <p>Already a member? <a routerLink="/login"><i class="bi bi-door-open"></i> Login</a></p>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-8">
+                <div class="text-center mt-5">
+                    <!-- <img src="../../assets/undraw_doctor_kw-5-l.svg" alt="Contact Us Image"> -->
+                    <section class="contact">
+                      <h2>Contact Us</h2>
+                      <p>If you have any questions or need assistance, feel free to reach out to us.</p>
+                      <p>Email: info@myhouseapp.com</p>
+                      <p>Phone: 123-456-7890</p>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>

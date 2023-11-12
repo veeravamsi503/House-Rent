@@ -1,0 +1,37 @@
+<div class="row">
+  <div class="col-md-3" *ngFor="let property of filteredProperties">
+    <div class="card text-dark" style="width: 18rem;">
+      <div class="card-body">
+        <img class="card-img-top" src="https://source.unsplash.com/random/1920x1080/?house" alt="Card image cap">
+        <hr>
+        <!-- <p>Owner: {{ property.owner }}</p> -->
+        <p>Rent: {{ property.rent }}</p>
+        <p>Area: {{ property.area }}</p>
+        <p>Place: {{ property.place }}</p>
+        <p>Amenities: {{ property.amenities }}</p>
+        <p>Status: {{ property.status }}</p>
+        <hr>
+        <p>Contact: {{ property.contact }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- <ul class="card text-dark">
+  <img src="https://source.unsplash.com/random/1920x1080/?house" alt="">
+  <li *ngFor="let property of filteredProperties">
+    <p>Owner: {{ property.owner }}</p>
+    <p>Rent: {{ property.rent }}</p>
+    <p>Contact: {{ property.contact }}</p>
+    <p>Area: {{ property.area }}</p>
+    <p>Place: {{ property.place }}</p>
+    <p>Amenities: {{ property.amenities }}</p>
+    <p>Status: {{ property.status }}</p>
+    <hr>
+    <p>Owner Contact: {{ property.contact }}</p>
+    <button *ngIf="isLoggedIn && usertype === 'tenant'" [disabled]="property.contactRequestApproved" (click)="requestContactDetails(property)">Request Contact Details</button>
+    <button *ngIf="isLoggedIn && usertype === 'owner'" (click)="approveContactRequest(property)">Approve Contact Request</button>
+    <p *ngIf="property.showContactEmail && property.contactEmail">Contact Email: {{ property.contactEmail }}</p>
+  </li>
+</ul> -->
